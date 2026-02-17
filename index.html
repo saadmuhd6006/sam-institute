@@ -7,453 +7,442 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
     :root {
-      --primary:     #1a7a77;
-      --primary-dark:#0f5852;
-      --accent:      #d4a017;
-      --accent-soft: rgba(212,160,23,0.15);
-      --text-dark:   #0f172a;
-      --text-light:  #e2e8f0;
-      --glass-bg:    rgba(255,255,255,0.09);
-      --glass-border:rgba(255,255,255,0.16);
-      --blur:        blur(20px);
-      --shadow-soft: 0 12px 42px rgba(0,0,0,0.22);
-      --glow:        0 0 28px rgba(26,122,119,0.28);
-      --transition:  all 0.42s cubic-bezier(0.34,1.56,0.64,1);
+      --primary:    #1a7a77;
+      --primary-d:  #115954;
+      --accent:     #d4a017;
+      --text:       #f1f5f9;
+      --text-m:     #cbd5e1;
+      --bg:         #0c172f;
+      --glass:      rgba(255,255,255,0.08);
+      --glass-bd:   rgba(255,255,255,0.15);
+      --shadow:     0 10px 32px rgba(0,0,0,0.35);
+      --glow:       0 0 24px rgba(26,122,119,0.28);
+      --blur:       blur(16px);
+      --tr:         all 0.38s cubic-bezier(0.4,0,0.2,1);
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      * { transition-duration: 0.01ms !important; animation: none !important; }
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
     html, body {
-      height: 100%;
-      font-family: 'Poppins', system-ui, sans-serif;
-      background: linear-gradient(135deg, #0b1a3d 0%, #112b54 50%, #0b1a3d 100%);
-      color: var(--text-light);
-      overflow-x: hidden;
-    }
-
-    body {
-      position: relative;
-      overscroll-behavior-y: contain;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(212,160,23,0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(26,122,119,0.05) 0%, transparent 60%),
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 0L62 25 87 25 68 44 75 75 50 56 25 75 32 44 13 25 38 25z" fill="none" stroke="%23ffffff" stroke-width="0.45" opacity="0.05"/></svg>') repeat;
-      background-size: 240px 240px;
-      opacity: 0.48;
-      pointer-events: none;
-      z-index: -10;
-      animation: rotate-bg 360s linear infinite;
-    }
-
-    @keyframes rotate-bg {
-      to { transform: rotate(360deg); }
+      height:100%;
+      font-family:'Poppins', system-ui, sans-serif;
+      background: linear-gradient(145deg, #0a1325, #0f1c38);
+      color:var(--text);
+      overflow-x:hidden;
     }
 
     .snap-container {
-      height: 100vh;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
+      height:100vh;
+      overflow-y:auto;
+      scroll-snap-type:y mandatory;
+      scroll-behavior:smooth;
     }
 
     .screen {
-      height: 100vh;
-      width: 100%;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      display: grid;
-      place-items: center;
-      padding: 1.5rem 1rem;
-      position: relative;
-      isolation: isolate;
+      height:100vh;
+      scroll-snap-align:start;
+      display:grid;
+      place-items:center;
+      padding:1.2rem;
+      position:relative;
     }
 
-    /* Welcome Screen with mosque bg */
-    #welcome {
-      overflow: hidden;
-    }
-
+    /* ── Welcome ── */
     #welcome::before {
-      content: "";
-      position: absolute;
-      inset: -10%;
-      background: linear-gradient(rgba(13, 31, 69, 0.68), rgba(19, 47, 94, 0.48)),
-                  url('https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&q=85&w=2000') center/cover no-repeat fixed;
-      opacity: 0.92;
-      filter: brightness(0.68) contrast(1.1) saturate(0.82);
-      transform: scale(1.05);
-      animation: breathe 50s infinite ease-in-out;
-      z-index: -1;
-      pointer-events: none;
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(rgba(10,20,40,0.82), rgba(15,30,60,0.68)),
+                  url('https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&q=80&w=1600') center/cover;
+      opacity:0.88;
+      z-index:-1;
     }
 
-    @keyframes breathe {
-      0%,100% { transform: scale(1.05) translate(0,0); }
-      50%     { transform: scale(1.09) translate(0,-18px); }
+    .card {
+      width:100%;
+      max-width:420px;
+      background:var(--glass);
+      backdrop-filter:var(--blur);
+      border:1px solid var(--glass-bd);
+      border-radius:1.8rem;
+      padding:2.4rem 2rem;
+      box-shadow:var(--shadow), var(--glow);
+      text-align:center;
+      animation:fadeIn 1.2s ease-out;
     }
 
-    .welcome-card {
-      max-width: 440px;
-      width: 100%;
-      background: var(--glass-bg);
-      backdrop-filter: var(--blur);
-      -webkit-backdrop-filter: var(--blur);
-      border: 1px solid var(--glass-border);
-      border-radius: 2.4rem;
-      padding: 3.6rem 2.8rem;
-      box-shadow: var(--shadow-soft), var(--glow);
-      text-align: center;
-      animation: fade-up 1.7s cubic-bezier(0.23,1,0.32,1);
-    }
-
-    @keyframes fade-up {
-      from { opacity:0; transform: translateY(100px) scale(0.95); }
-      to   { opacity:1; transform: none; }
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(40px); }
+      to   { opacity:1; transform:none; }
     }
 
     .title {
-      font-family: 'Reem Kufi', sans-serif;
-      font-size: clamp(3rem, 11vw, 5rem);
-      font-weight: 700;
-      line-height: 1.05;
-      color: #f8faff;
-      text-shadow: 0 6px 30px rgba(0,0,0,0.7);
-      margin-bottom: 1.6rem;
-      letter-spacing: -0.7px;
+      font-family:'Reem Kufi', sans-serif;
+      font-size:clamp(2.8rem, 9vw, 4.2rem);
+      font-weight:700;
+      color:#fff;
+      margin-bottom:1rem;
+      line-height:1.1;
     }
 
-    .description {
-      font-size: 1.15rem;
-      line-height: 1.8;
-      opacity: 0.94;
-      max-width: 90%;
-      margin: 0 auto 3.2rem;
-      color: #d4e0f2;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    .desc {
+      font-size:1.05rem;
+      line-height:1.6;
+      color:var(--text-m);
+      opacity:0.95;
     }
 
-    /* Login Screen */
+    /* ── Login ── */
     #login {
-      background: linear-gradient(155deg, #f8fafc 0%, #f1f5f9 100%);
-      color: var(--text-dark);
+      background: linear-gradient(155deg, #f8fafc, #f1f5f9);
+      color:#0f172a;
     }
 
-    .login-card {
-      width: 100%;
-      max-width: 420px;
-      background: var(--glass-bg);
-      backdrop-filter: var(--blur);
-      -webkit-backdrop-filter: var(--blur);
-      border: 1px solid var(--glass-border);
-      border-radius: 2.4rem;
-      padding: 3rem 2.5rem;
-      box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,0.18), var(--glow);
-      position: relative;
-      overflow: hidden;
-      animation: fade-up 1.5s cubic-bezier(0.23,1,0.32,1);
+    .form-title {
+      font-family:'Reem Kufi', sans-serif;
+      font-size:2.2rem;
+      color:var(--primary);
+      margin-bottom:0.3rem;
     }
 
-    .login-card::before {
-      content: "";
-      position: absolute;
-      inset: -50%;
-      background: radial-gradient(circle at 30% 20%, var(--accent-soft) 0%, transparent 60%);
-      opacity: 0.7;
-      pointer-events: none;
-      animation: soft-pulse 18s ease-in-out infinite;
+    .form-subtitle {
+      color:#64748b;
+      font-size:0.98rem;
+      margin-bottom:1.8rem;
     }
 
-    @keyframes soft-pulse {
-      0%,100% { opacity: 0.6; transform: scale(1); }
-      50%     { opacity: 0.9; transform: scale(1.15); }
+    .input-wrap {
+      position:relative;
+      margin-bottom:1.4rem;
+      border:1.5px solid #e2e8f0;
+      border-radius:1.2rem;
+      background:rgba(255,255,255,0.7);
+      backdrop-filter:blur(8px);
+      transition:var(--tr);
     }
 
-    .accent-line {
-      height: 3px;
-      width: 60px;
-      background: linear-gradient(to right, var(--primary), var(--accent));
-      border-radius: 3px;
-      margin: 1.2rem auto 2.2rem;
-    }
-
-    h2 {
-      font-family: 'Reem Kufi', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--primary);
-      text-align: center;
-      letter-spacing: -0.4px;
-    }
-
-    .subtitle {
-      color: #64748b;
-      font-size: 1.02rem;
-      text-align: center;
-      margin-bottom: 0.8rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.8rem;
-    }
-
-    .input-wrapper {
-      position: relative;
-      border: 1.5px solid rgba(226,232,240,0.9);
-      border-radius: 1.3rem;
-      background: rgba(255,255,255,0.65);
-      transition: var(--transition);
-      backdrop-filter: blur(8px);
-    }
-
-    .input-wrapper:focus-within {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 6px rgba(26,122,119,0.16), var(--glow);
-      transform: translateY(-2px);
+    .input-wrap:focus-within {
+      border-color:var(--primary);
+      box-shadow:0 0 0 5px rgba(26,122,119,0.15);
     }
 
     input {
-      width: 100%;
-      height: 60px;
-      padding-inline: 3.6rem 1.4rem;
-      border: none;
-      font-size: 1.05rem;
-      color: #1e293b;
-      background: transparent;
-      direction: ltr;
+      width:100%;
+      height:54px;
+      padding:0 3.2rem 0 4.2rem;
+      border:none;
+      font-size:1.02rem;
+      background:transparent;
     }
 
     label {
-      position: absolute;
-      inset-inline-start: 3.6rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #94a3b8;
-      font-size: 1.05rem;
-      pointer-events: none;
-      transition: var(--transition);
+      position:absolute;
+      left:4.2rem;
+      top:50%;
+      transform:translateY(-50%);
+      color:#94a3b8;
+      font-size:1.02rem;
+      pointer-events:none;
+      transition:var(--tr);
     }
 
     input:focus + label,
     input:not(:placeholder-shown) + label {
-      inset-inline-start: 1.6rem;
-      top: 0.7rem;
-      font-size: 0.84rem;
-      color: var(--primary);
-      font-weight: 500;
+      left:1.8rem;
+      top:0.6rem;
+      font-size:0.82rem;
+      color:var(--primary);
     }
 
-    .input-icon {
-      position: absolute;
-      inset-inline-start: 1.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #94a3b8;
-      font-size: 1.45rem;
-      transition: color 0.4s;
+    .icon {
+      position:absolute;
+      left:1.4rem;
+      top:50%;
+      transform:translateY(-50%);
+      color:#94a3b8;
+      font-size:1.3rem;
     }
 
-    .input-wrapper:focus-within .input-icon { color: var(--primary); }
-
-    .toggle-password {
-      position: absolute;
-      inset-inline-end: 1.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: #94a3b8;
-      font-size: 1.45rem;
-      cursor: pointer;
-      padding: 0.8rem;
-      transition: color 0.35s, transform 0.35s;
+    .toggle {
+      position:absolute;
+      right:1.4rem;
+      top:50%;
+      transform:translateY(-50%);
+      background:none;
+      border:none;
+      color:#94a3b8;
+      font-size:1.3rem;
+      cursor:pointer;
     }
 
-    .toggle-password:hover,
-    .toggle-password:focus {
-      color: var(--primary);
-      transform: translateY(-50%) scale(1.15);
-      outline: none;
+    .btn {
+      width:100%;
+      padding:1.1rem;
+      margin:1.6rem 0 1rem;
+      background:linear-gradient(135deg, var(--primary), var(--primary-d));
+      color:white;
+      border:none;
+      border-radius:1.2rem;
+      font-size:1.05rem;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 8px 24px rgba(26,122,119,0.35);
+      transition:var(--tr);
     }
 
-    .btn-login {
-      width: 100%;
-      padding: 1.35rem;
-      margin: 2.2rem 0 1.8rem;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      border: none;
-      border-radius: 1.3rem;
-      font-size: 1.12rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 10px 32px rgba(26,122,119,0.38);
-      transition: var(--transition);
+    .btn:hover {
+      transform:translateY(-2px);
+      box-shadow:0 12px 32px rgba(26,122,119,0.45);
     }
 
-    .btn-login:hover,
-    .btn-login:focus {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 16px 44px rgba(26,122,119,0.48);
-      outline: none;
-    }
-
-    .options {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.98rem;
-      margin-top: 1.4rem;
-    }
-
-    .link {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
-
-    .link:hover,
-    .link:focus {
-      color: var(--accent);
-      text-decoration: underline;
-      letter-spacing: 0.4px;
-      outline: none;
+    .warning {
+      color:#ef4444;
+      text-align:center;
+      font-size:0.95rem;
+      margin-top:0.8rem;
+      display:none;
     }
 
     .signup {
-      text-align: center;
-      margin-top: 2.8rem;
-      color: #64748b;
-      font-size: 1rem;
+      text-align:center;
+      font-size:0.95rem;
+      color:#64748b;
+      margin-top:1.8rem;
     }
 
-    .signup a,
-    .options a {
-      color: var(--primary);
-      font-weight: 600;
-      transition: var(--transition);
+    .signup a {
+      color:var(--primary);
+      font-weight:500;
+      text-decoration:none;
     }
 
-    .signup a:hover,
-    .signup a:focus,
-    .options a:hover,
-    .options a:focus {
-      color: var(--accent);
-      text-decoration: underline;
+    .signup a:hover { color:var(--accent); text-decoration:underline; }
+
+    @keyframes shake {
+      0%,100% { transform:translateX(0); }
+      25%,75% { transform:translateX(-4px); }
+      50%     { transform:translateX(4px); }
     }
 
-    @media (prefers-color-scheme: dark) {
-      #login {
-        background: linear-gradient(155deg, #0f172a 0%, #1e293b 100%);
-        color: var(--text-light);
-      }
-      .login-card {
-        background: rgba(30,41,59,0.75);
-        border-color: rgba(255,255,255,0.12);
-      }
-      .input-wrapper {
-        border-color: rgba(255,255,255,0.18);
-        background: rgba(255,255,255,0.06);
-      }
-      input { color: var(--text-light); }
-      label, .input-icon { color: #cbd5e1; }
-      .subtitle { color: #94a3b8; }
+    /* ── Dashboard ── */
+    #dashboard {
+      background: linear-gradient(145deg, #0a1325, #0f1c38);
+      display:none;
+    }
+
+    .dash-card {
+      max-width:460px;
+      padding:2.8rem 2.2rem;
+      background:linear-gradient(155deg, rgba(26,122,119,0.08), rgba(13,31,69,0.22));
+      border:1px solid rgba(212,160,23,0.18);
+      border-radius:2rem;
+      backdrop-filter:var(--blur);
+      box-shadow:var(--shadow), 0 0 28px rgba(212,160,23,0.18);
+    }
+
+    .dash-title {
+      font-family:'Reem Kufi', sans-serif;
+      font-size:clamp(2.6rem, 8vw, 3.8rem);
+      background:linear-gradient(90deg, #e2e8f0, #d4a017, #e2e8f0);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:0.8rem;
+    }
+
+    .dash-subtitle {
+      font-size:1.1rem;
+      color:#d4a017;
+      opacity:0.9;
+      margin-bottom:1.8rem;
+    }
+
+    #typing {
+      font-size:1.02rem;
+      line-height:1.65;
+      color:var(--text-m);
+      margin:0 auto 2.2rem;
+      max-width:100%;
+      white-space:pre-wrap;
+      overflow:hidden;
+      border-right:0.16em solid var(--accent);
+      animation:blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { border-color:transparent; }
+    }
+
+    #continueBtn {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:0.8rem;
+      width:100%;
+      padding:1.1rem;
+      background:linear-gradient(135deg, var(--accent), #b58900);
+      color:#0f172a;
+      font-size:1.05rem;
+      font-weight:600;
+      border:none;
+      border-radius:1.4rem;
+      cursor:pointer;
+      box-shadow:0 10px 28px rgba(212,160,23,0.4);
+      opacity:0;
+      transform:translateY(20px);
+      transition:all 0.7s ease-out;
+    }
+
+    #continueBtn.visible {
+      opacity:1;
+      transform:none;
+    }
+
+    #continueBtn:hover i { transform:translateX(6px); }
+
+    .dots {
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      margin-top:2.2rem;
+      opacity:0.6;
+    }
+
+    .dot {
+      width:8px;
+      height:8px;
+      background:var(--accent);
+      border-radius:50%;
+      animation:pulse 4s infinite;
+    }
+
+    .dot:nth-child(2) { animation-delay:0.8s; }
+    .dot:nth-child(3) { animation-delay:1.6s; }
+
+    @keyframes pulse {
+      50% { transform:scale(1.6); opacity:1; }
+    }
+
+    @media (max-width:480px) {
+      .card, .dash-card { padding:2rem 1.4rem; border-radius:1.5rem; }
+      .title { font-size:clamp(2.4rem, 10vw, 3.4rem); }
     }
   </style>
 </head>
 <body>
 
-  <div class="snap-container">
+<div class="snap-container">
 
-    <!-- Welcome Screen -->
-    <section class="screen" id="welcome">
-      <div class="welcome-card">
-        <h1 class="title">SAM Institute</h1>
-        <p class="description">
-          A peaceful sanctuary for learning the Quran, Hadith, Fiqh and timeless Islamic wisdom — at your own pace, with serenity.
-        </p>
+  <!-- Welcome -->
+  <section class="screen" id="welcome">
+    <div class="card">
+      <h1 class="title">SAM Institute</h1>
+      <p class="desc">A peaceful place to learn Quran, Hadith, Fiqh and authentic Islamic wisdom — at your own pace.</p>
+    </div>
+  </section>
+
+  <!-- Login -->
+  <section class="screen" id="login">
+    <div class="card">
+      <h2 class="form-title">مرحبا بعودتك</h2>
+      <p class="form-subtitle">Sign in to continue your journey</p>
+
+      <form id="loginForm">
+        <div class="input-wrap">
+          <i class="fa-solid fa-user icon"></i>
+          <input type="text" id="usercode" placeholder=" " required />
+          <label for="usercode">Usercode</label>
+        </div>
+
+        <div class="input-wrap">
+          <i class="fa-solid fa-lock icon"></i>
+          <input type="password" id="password" placeholder=" " required />
+          <label for="password">Password</label>
+          <button type="button" class="toggle" aria-label="Toggle password">
+            <i class="fa-solid fa-eye"></i>
+          </button>
+        </div>
+
+        <button type="submit" class="btn">Sign In</button>
+        <p class="warning" id="warning">Invalid credentials. Try again or join WhatsApp channel.</p>
+      </form>
+
+      <p class="signup">
+        New here? <a id="wa" href="https://whatsapp.com/channel/0029VbBuXaRDTkKCT3hDly0K" target="_blank">Join our WhatsApp channel</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Dashboard -->
+  <section class="screen" id="dashboard">
+    <div class="dash-card">
+      <h1 class="dash-title">Welcome</h1>
+      <div class="dash-subtitle">Your journey in Islamic knowledge begins</div>
+
+      <p id="typing"></p>
+
+      <button id="continueBtn">
+        <span>Continue</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+
+      <div class="dots">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Login Screen -->
-    <section class="screen" id="login">
-      <div class="login-card">
-        <h2>مرحبا بعودتك</h2>
-        <div class="accent-line"></div>
-        <p class="subtitle">Sign in to continue your journey of knowledge</p>
+</div>
 
-        <form id="loginForm" novalidate dir="auto">
-          <div class="form-group">
-            <div class="input-wrapper">
-              <i class="fa-solid fa-user input-icon"></i>
-              <input type="text" id="usercode" placeholder=" " required autocomplete="username" />
-              <label for="usercode">Usercode</label>
-            </div>
-          </div>
+<script>
+// Password toggle
+document.querySelector('.toggle')?.addEventListener('click', e => {
+  const pw = document.getElementById('password');
+  const i = e.currentTarget.querySelector('i');
+  pw.type = pw.type === 'password' ? 'text' : 'password';
+  i.classList.toggle('fa-eye');
+  i.classList.toggle('fa-eye-slash');
+});
 
-          <div class="form-group">
-            <div class="input-wrapper">
-              <i class="fa-solid fa-lock input-icon"></i>
-              <input type="password" id="password" placeholder=" " required autocomplete="current-password" />
-              <label for="password">Password</label>
-              <button type="button" class="toggle-password" aria-label="Toggle password visibility">
-                <i class="fa-solid fa-eye"></i>
-              </button>
-            </div>
-          </div>
+// Login
+document.getElementById('loginForm')?.addEventListener('submit', e => {
+  e.preventDefault();
+  const uc = document.getElementById('usercode').value.trim();
+  const pw = document.getElementById('password').value.trim();
+  const warn = document.getElementById('warning');
+  const link = document.getElementById('wa');
 
-          <button type="submit" class="btn-login">Sign In</button>
+  if (uc === 'Samislamicweb' && pw === '87654321') {
+    document.getElementById('dashboard').style.display = 'grid';
+    document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
 
-          <div class="options">
-            <a href="https://whatsapp.com/channel/0029VbBuXaRDTkKCT3hDly0K" target="_blank" rel="noopener noreferrer" class="link">Forgot password?</a>
-            <a href="https://whatsapp.com/channel/0029VbBuXaRDTkKCT3hDly0K" target="_blank" rel="noopener noreferrer" class="link">Sign up</a>
-          </div>
-        </form>
+    const msg = `Assalamu alaikum!\n\nWelcome to SAM Institute.\n\nMay your time here be filled with beneficial knowledge and tranquility.`;
 
-        <p class="signup">
-          New to SAM Institute? <a href="https://whatsapp.com/channel/0029VbBuXaRDTkKCT3hDly0K" target="_blank" rel="noopener noreferrer">Join our WhatsApp channel to create your account</a>
-        </p>
-      </div>
-    </section>
+    let i = 0;
+    const el = document.getElementById('typing');
+    const btn = document.getElementById('continueBtn');
+    el.textContent = '';
+    btn.classList.remove('visible');
 
-  </div>
-
-  <script>
-    // Password visibility toggle
-    document.querySelector('.toggle-password')?.addEventListener('click', () => {
-      const input = document.getElementById('password');
-      const icon = document.querySelector('.toggle-password i');
-      input.type = input.type === 'password' ? 'text' : 'password';
-      icon.classList.toggle('fa-eye');
-      icon.classList.toggle('fa-eye-slash');
-    });
-
-    // Simulate login
-    document.getElementById('loginForm')?.addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Welcome back to SAM Institute!');
-    });
-  </script>
-
+    function type() {
+      if (i < msg.length) {
+        el.textContent += msg[i++];
+        setTimeout(type, 30);
+      } else {
+        setTimeout(() => btn.classList.add('visible'), 600);
+      }
+    }
+    type();
+  } else {
+    warn.style.display = 'block';
+    link.classList.add('shake');
+    setTimeout(() => link.classList.remove('shake'), 600);
+  }
+});
+</script>
 </body>
 </html>
