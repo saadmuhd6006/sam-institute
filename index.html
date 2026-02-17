@@ -2,447 +2,1150 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SAM Institute — Islamic Learning</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="SAM Institute: A comprehensive platform for authentic Islamic learning, covering Quran, Hadith, Fiqh, and more in a serene digital environment." />
+  <meta name="keywords" content="Islamic learning, Quran, Hadith, Fiqh, Islamic history, Duas, Ramadan, Hajj, Tafsir, Ethics" />
+  <meta name="author" content="SAM Institute" />
+  <meta name="robots" content="index, follow" />
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https://images.unsplash.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; media-src 'self'; object-src 'none'; frame-ancestors 'none';" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload" />
+  <title>SAM Institute — Comprehensive Islamic Learning Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕌</text></svg>" />
   <style>
     :root {
-      --primary:    #1a7a77;
-      --primary-d:  #115954;
-      --accent:     #d4a017;
-      --text:       #f1f5f9;
-      --text-m:     #cbd5e1;
-      --bg:         #0c172f;
-      --glass:      rgba(255,255,255,0.08);
-      --glass-bd:   rgba(255,255,255,0.15);
-      --shadow:     0 10px 32px rgba(0,0,0,0.35);
-      --glow:       0 0 24px rgba(26,122,119,0.28);
-      --blur:       blur(16px);
-      --tr:         all 0.38s cubic-bezier(0.4,0,0.2,1);
+      --primary: #1a7a77;
+      --primary-d: #115954;
+      --primary-l: #2a9d8f;
+      --accent: #d4a017;
+      --accent-d: #b58900;
+      --text: #f1f5f9;
+      --text-d: #0f172a;
+      --text-m: #cbd5e1;
+      --bg: #0c172f;
+      --bg-l: #1e293b;
+      --glass: rgba(255,255,255,0.12);
+      --glass-bd: rgba(255,255,255,0.18);
+      --shadow: 0 12px 40px rgba(0,0,0,0.4);
+      --glow: 0 0 28px rgba(26,122,119,0.35);
+      --blur: blur(20px);
+      --tr: all 0.45s cubic-bezier(0.4,0,0.2,1);
+      --tr-slow: all 0.6s cubic-bezier(0.4,0,0.2,1);
+      --font-arabic: 'Amiri', serif;
+      --font-main: 'Poppins', system-ui, sans-serif;
+      --font-title: 'Reem Kufi', sans-serif;
     }
-
     * { margin:0; padding:0; box-sizing:border-box; }
     html, body {
       height:100%;
-      font-family:'Poppins', system-ui, sans-serif;
+      font-family:var(--font-main);
       background: linear-gradient(145deg, #0a1325, #0f1c38);
       color:var(--text);
       overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      touch-action:manipulation;
+      scroll-behavior:smooth;
     }
-
     .snap-container {
       height:100vh;
       overflow-y:auto;
       scroll-snap-type:y mandatory;
-      scroll-behavior:smooth;
+      perspective:1000px;
+      -webkit-overflow-scrolling:touch;
     }
-
     .screen {
-      height:100vh;
+      min-height:100vh;
       scroll-snap-align:start;
       display:grid;
       place-items:center;
-      padding:1.2rem;
+      padding:2rem;
       position:relative;
+      transition:var(--tr-slow);
+      transform-style:preserve-3d;
     }
-
-    /* ── Welcome ── */
-    #welcome::before {
+    .screen::before {
       content:"";
       position:absolute;
       inset:0;
-      background: linear-gradient(rgba(10,20,40,0.82), rgba(15,30,60,0.68)),
-                  url('https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&q=80&w=1600') center/cover;
-      opacity:0.88;
+      background: linear-gradient(rgba(10,20,40,0.85), rgba(15,30,60,0.72)),
+                  url('https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat fixed;
+      opacity:0.92;
       z-index:-1;
-    }
-
-    .card {
-      width:100%;
-      max-width:420px;
-      background:var(--glass);
-      backdrop-filter:var(--blur);
-      border:1px solid var(--glass-bd);
-      border-radius:1.8rem;
-      padding:2.4rem 2rem;
-      box-shadow:var(--shadow), var(--glow);
-      text-align:center;
-      animation:fadeIn 1.2s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity:0; transform:translateY(40px); }
-      to   { opacity:1; transform:none; }
-    }
-
-    .title {
-      font-family:'Reem Kufi', sans-serif;
-      font-size:clamp(2.8rem, 9vw, 4.2rem);
-      font-weight:700;
-      color:#fff;
-      margin-bottom:1rem;
-      line-height:1.1;
-    }
-
-    .desc {
-      font-size:1.05rem;
-      line-height:1.6;
-      color:var(--text-m);
-      opacity:0.95;
-    }
-
-    /* ── Login ── */
-    #login {
-      background: linear-gradient(155deg, #f8fafc, #f1f5f9);
-      color:#0f172a;
-    }
-
-    .form-title {
-      font-family:'Reem Kufi', sans-serif;
-      font-size:2.2rem;
-      color:var(--primary);
-      margin-bottom:0.3rem;
-    }
-
-    .form-subtitle {
-      color:#64748b;
-      font-size:0.98rem;
-      margin-bottom:1.8rem;
-    }
-
-    .input-wrap {
-      position:relative;
-      margin-bottom:1.4rem;
-      border:1.5px solid #e2e8f0;
-      border-radius:1.2rem;
-      background:rgba(255,255,255,0.7);
-      backdrop-filter:blur(8px);
       transition:var(--tr);
     }
-
-    .input-wrap:focus-within {
-      border-color:var(--primary);
-      box-shadow:0 0 0 5px rgba(26,122,119,0.15);
+    .card, .dash-card, .content-card {
+      width:100%;
+      max-width:560px;
+      background:var(--glass);
+      backdrop-filter:var(--blur);
+      border:1.5px solid var(--glass-bd);
+      border-radius:2rem;
+      padding:3rem 2.5rem;
+      box-shadow:var(--shadow), var(--glow);
+      text-align:center;
+      animation:fadeInUp 1.4s ease-out;
+      transform:translateZ(20px);
+      transition:var(--tr);
     }
-
+    .card:hover, .dash-card:hover, .content-card:hover {
+      transform:translateZ(40px) translateY(-5px);
+      box-shadow:0 16px 48px rgba(0,0,0,0.5), 0 0 36px rgba(26,122,119,0.45);
+    }
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(60px); }
+      to { opacity:1; transform:translateZ(20px); }
+    }
+    .title {
+      font-family:var(--font-title);
+      font-size:clamp(2.8rem, 10vw, 4.5rem);
+      font-weight:700;
+      color:#fff;
+      margin-bottom:1.4rem;
+      line-height:1.05;
+      text-shadow:0 2px 8px rgba(0,0,0,0.3);
+    }
+    .arabic-title {
+      font-family:var(--font-arabic);
+      font-size:clamp(2.2rem, 8vw, 3.5rem);
+      margin-top:0.5rem;
+      color:var(--accent);
+    }
+    .subtitle {
+      font-size:1.2rem;
+      color:var(--accent);
+      margin-bottom:1.8rem;
+      opacity:0.95;
+      font-weight:500;
+    }
+    .desc, .content-text {
+      font-size:1.05rem;
+      line-height:1.75;
+      color:var(--text-m);
+      margin-bottom:2.4rem;
+      text-align:justify;
+      hyphens:auto;
+    }
+    .arabic-text {
+      font-family:var(--font-arabic);
+      font-size:1.15rem;
+      direction:rtl;
+      text-align:right;
+      margin:1rem 0;
+      color:var(--text);
+    }
+    .btn, .continue-btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:1rem;
+      padding:1.2rem 2.5rem;
+      background:linear-gradient(135deg, var(--primary), var(--primary-d));
+      color:white;
+      border:none;
+      border-radius:1.5rem;
+      font-size:1.08rem;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 10px 28px rgba(26,122,119,0.4);
+      transition:var(--tr);
+      text-decoration:none;
+      margin:1rem 0;
+    }
+    .continue-btn {
+      background:linear-gradient(135deg, var(--accent), var(--accent-d));
+      color:var(--text-d);
+      box-shadow:0 12px 32px rgba(212,160,23,0.45);
+    }
+    .btn:hover, .continue-btn:hover {
+      transform:translateY(-4px) scale(1.02);
+      box-shadow:0 16px 40px rgba(26,122,119,0.55);
+    }
+    .continue-btn:hover i { transform:translateX(10px) rotate(15deg); }
+    #typing {
+      white-space:pre-wrap;
+      overflow:hidden;
+      border-right:0.2em solid var(--accent);
+      animation:blink 0.8s step-end infinite;
+      font-size:1.05rem;
+      line-height:1.6;
+    }
+    @keyframes blink { 50% { border-color:transparent; } }
+    .warning { color:#ef4444; margin-top:1.4rem; font-size:1rem; display:none; animation:shake 0.5s; }
+    @keyframes shake { 0%, 100% { transform:translateX(0); } 20%, 60% { transform:translateX(-5px); } 40%, 80% { transform:translateX(5px); } }
+    .input-wrap {
+      position:relative;
+      margin:1.6rem 0;
+      border:1.5px solid var(--glass-bd);
+      border-radius:1.5rem;
+      background:var(--glass);
+      backdrop-filter:var(--blur);
+      transition:var(--tr);
+    }
+    .input-wrap:focus-within { border-color:var(--primary); box-shadow:var(--glow); }
+    .input-wrap i { position:absolute; left:1.8rem; top:50%; transform:translateY(-50%); color:var(--text-m); font-size:1.5rem; transition:var(--tr); }
     input {
       width:100%;
-      height:54px;
-      padding:0 3.2rem 0 4.2rem;
+      height:60px;
+      padding:0 3.8rem 0 5rem;
       border:none;
-      font-size:1.02rem;
+      font-size:1.05rem;
       background:transparent;
+      color:var(--text);
+      transition:var(--tr);
     }
-
+    input:focus { outline:none; }
     label {
       position:absolute;
-      left:4.2rem;
+      left:5rem;
       top:50%;
       transform:translateY(-50%);
-      color:#94a3b8;
-      font-size:1.02rem;
+      color:var(--text-m);
+      font-size:1.05rem;
       pointer-events:none;
       transition:var(--tr);
     }
-
-    input:focus + label,
-    input:not(:placeholder-shown) + label {
+    input:not(:placeholder-shown) + label, input:focus + label {
+      top:0.8rem;
       left:1.8rem;
-      top:0.6rem;
-      font-size:0.82rem;
+      font-size:0.85rem;
       color:var(--primary);
     }
-
-    .icon {
-      position:absolute;
-      left:1.4rem;
-      top:50%;
-      transform:translateY(-50%);
-      color:#94a3b8;
-      font-size:1.3rem;
-    }
-
     .toggle {
       position:absolute;
-      right:1.4rem;
+      right:1.8rem;
       top:50%;
       transform:translateY(-50%);
       background:none;
       border:none;
-      color:#94a3b8;
-      font-size:1.3rem;
+      color:var(--text-m);
       cursor:pointer;
-    }
-
-    .btn {
-      width:100%;
-      padding:1.1rem;
-      margin:1.6rem 0 1rem;
-      background:linear-gradient(135deg, var(--primary), var(--primary-d));
-      color:white;
-      border:none;
-      border-radius:1.2rem;
-      font-size:1.05rem;
-      font-weight:600;
-      cursor:pointer;
-      box-shadow:0 8px 24px rgba(26,122,119,0.35);
       transition:var(--tr);
     }
-
-    .btn:hover {
-      transform:translateY(-2px);
-      box-shadow:0 12px 32px rgba(26,122,119,0.45);
+    .toggle:hover { color:var(--primary); }
+    .progress-bar {
+      position:fixed;
+      top:0;
+      left:0;
+      height:4px;
+      background:var(--primary);
+      z-index:1000;
+      transition:width 0.3s ease;
     }
-
-    .warning {
-      color:#ef4444;
-      text-align:center;
-      font-size:0.95rem;
-      margin-top:0.8rem;
-      display:none;
-    }
-
-    .signup {
-      text-align:center;
-      font-size:0.95rem;
-      color:#64748b;
-      margin-top:1.8rem;
-    }
-
-    .signup a {
-      color:var(--primary);
-      font-weight:500;
-      text-decoration:none;
-    }
-
-    .signup a:hover { color:var(--accent); text-decoration:underline; }
-
-    @keyframes shake {
-      0%,100% { transform:translateX(0); }
-      25%,75% { transform:translateX(-4px); }
-      50%     { transform:translateX(4px); }
-    }
-
-    /* ── Dashboard ── */
-    #dashboard {
-      background: linear-gradient(145deg, #0a1325, #0f1c38);
-      display:none;
-    }
-
-    .dash-card {
-      max-width:460px;
-      padding:2.8rem 2.2rem;
-      background:linear-gradient(155deg, rgba(26,122,119,0.08), rgba(13,31,69,0.22));
-      border:1px solid rgba(212,160,23,0.18);
-      border-radius:2rem;
+    .nav-bar {
+      position:fixed;
+      bottom:2rem;
+      left:50%;
+      transform:translateX(-50%);
+      background:var(--glass);
       backdrop-filter:var(--blur);
-      box-shadow:var(--shadow), 0 0 28px rgba(212,160,23,0.18);
+      border:1px solid var(--glass-bd);
+      border-radius:50px;
+      padding:0.8rem 1.5rem;
+      display:flex;
+      gap:1.5rem;
+      box-shadow:var(--shadow);
+      z-index:50;
+      transition:var(--tr);
     }
-
-    .dash-title {
-      font-family:'Reem Kufi', sans-serif;
-      font-size:clamp(2.6rem, 8vw, 3.8rem);
-      background:linear-gradient(90deg, #e2e8f0, #d4a017, #e2e8f0);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      margin-bottom:0.8rem;
-    }
-
-    .dash-subtitle {
-      font-size:1.1rem;
-      color:#d4a017;
-      opacity:0.9;
-      margin-bottom:1.8rem;
-    }
-
-    #typing {
-      font-size:1.02rem;
-      line-height:1.65;
+    .nav-item {
       color:var(--text-m);
-      margin:0 auto 2.2rem;
-      max-width:100%;
-      white-space:pre-wrap;
-      overflow:hidden;
-      border-right:0.16em solid var(--accent);
-      animation:blink 1s step-end infinite;
-    }
-
-    @keyframes blink {
-      50% { border-color:transparent; }
-    }
-
-    #continueBtn {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:0.8rem;
-      width:100%;
-      padding:1.1rem;
-      background:linear-gradient(135deg, var(--accent), #b58900);
-      color:#0f172a;
-      font-size:1.05rem;
-      font-weight:600;
-      border:none;
-      border-radius:1.4rem;
+      font-size:1.8rem;
       cursor:pointer;
-      box-shadow:0 10px 28px rgba(212,160,23,0.4);
-      opacity:0;
-      transform:translateY(20px);
-      transition:all 0.7s ease-out;
+      transition:var(--tr);
     }
-
-    #continueBtn.visible {
-      opacity:1;
-      transform:none;
+    .nav-item:hover, .nav-item.active { color:var(--primary); transform:scale(1.15); }
+    @media (max-width:600px) {
+      .card, .dash-card, .content-card { padding:2.5rem 2rem; border-radius:1.8rem; max-width:100%; }
+      .title { font-size:clamp(2.5rem, 11vw, 3.8rem); }
+      .nav-bar { bottom:1rem; padding:0.6rem 1rem; gap:1rem; }
     }
-
-    #continueBtn:hover i { transform:translateX(6px); }
-
-    .dots {
-      display:flex;
-      justify-content:center;
-      gap:1rem;
-      margin-top:2.2rem;
-      opacity:0.6;
-    }
-
-    .dot {
-      width:8px;
-      height:8px;
-      background:var(--accent);
-      border-radius:50%;
-      animation:pulse 4s infinite;
-    }
-
-    .dot:nth-child(2) { animation-delay:0.8s; }
-    .dot:nth-child(3) { animation-delay:1.6s; }
-
-    @keyframes pulse {
-      50% { transform:scale(1.6); opacity:1; }
-    }
-
-    @media (max-width:480px) {
-      .card, .dash-card { padding:2rem 1.4rem; border-radius:1.5rem; }
-      .title { font-size:clamp(2.4rem, 10vw, 3.4rem); }
-    }
+    /* Enhanced Swipe and Touch */
+    .snap-container { -ms-scroll-snap-type:y mandatory; scroll-padding-top:0; }
+    .screen { will-change:transform; }
+    /* Add parallax effect */
+    .parallax-bg { background-attachment:fixed; }
   </style>
 </head>
 <body>
-
-<div class="snap-container">
-
-  <!-- Welcome -->
-  <section class="screen" id="welcome">
-    <div class="card">
-      <h1 class="title">SAM Institute</h1>
-      <p class="desc">A peaceful place to learn Quran, Hadith, Fiqh and authentic Islamic wisdom — at your own pace.</p>
-    </div>
-  </section>
-
-  <!-- Login -->
-  <section class="screen" id="login">
-    <div class="card">
-      <h2 class="form-title">مرحبا بعودتك</h2>
-      <p class="form-subtitle">Sign in to continue your journey</p>
-
-      <form id="loginForm">
-        <div class="input-wrap">
-          <i class="fa-solid fa-user icon"></i>
-          <input type="text" id="usercode" placeholder=" " required />
-          <label for="usercode">Usercode</label>
-        </div>
-
-        <div class="input-wrap">
-          <i class="fa-solid fa-lock icon"></i>
-          <input type="password" id="password" placeholder=" " required />
-          <label for="password">Password</label>
-          <button type="button" class="toggle" aria-label="Toggle password">
-            <i class="fa-solid fa-eye"></i>
-          </button>
-        </div>
-
-        <button type="submit" class="btn">Sign In</button>
-        <p class="warning" id="warning">Invalid credentials. Try again or join WhatsApp channel.</p>
-      </form>
-
-      <p class="signup">
-        New here? <a id="wa" href="https://whatsapp.com/channel/0029VbBuXaRDTkKCT3hDly0K" target="_blank">Join our WhatsApp channel</a>
-      </p>
-    </div>
-  </section>
-
-  <!-- Dashboard -->
-  <section class="screen" id="dashboard">
-    <div class="dash-card">
-      <h1 class="dash-title">Welcome</h1>
-      <div class="dash-subtitle">Your journey in Islamic knowledge begins</div>
-
-      <p id="typing"></p>
-
-      <button id="continueBtn">
-        <span>Continue</span>
-        <i class="fa-solid fa-arrow-right"></i>
-      </button>
-
-      <div class="dots">
-        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  <div class="progress-bar" id="progress"></div>
+  <div class="snap-container" id="container">
+    <!-- 1. Welcome -->
+    <section class="screen" id="welcome">
+      <div class="card">
+        <h1 class="title">SAM Institute</h1>
+        <p class="arabic-title">معهد سام الإسلامي</p>
+        <p class="desc">A serene and comprehensive space for authentic Islamic learning, including Quran, Hadith, Fiqh, and much more — at your own peaceful pace. Explore over 50 sections of high-quality content designed for deep understanding and spiritual growth.</p>
+        <a href="#login" class="btn">Get Started <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-    </div>
-  </section>
-
-</div>
-
-<script>
-// Password toggle
-document.querySelector('.toggle')?.addEventListener('click', e => {
-  const pw = document.getElementById('password');
-  const i = e.currentTarget.querySelector('i');
-  pw.type = pw.type === 'password' ? 'text' : 'password';
-  i.classList.toggle('fa-eye');
-  i.classList.toggle('fa-eye-slash');
-});
-
-// Login
-document.getElementById('loginForm')?.addEventListener('submit', e => {
-  e.preventDefault();
-  const uc = document.getElementById('usercode').value.trim();
-  const pw = document.getElementById('password').value.trim();
-  const warn = document.getElementById('warning');
-  const link = document.getElementById('wa');
-
-  if (uc === 'Samislamicweb' && pw === '87654321') {
-    document.getElementById('dashboard').style.display = 'grid';
-    document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
-
-    const msg = `Assalamu alaikum!\n\nWelcome to SAM Institute.\n\nMay your time here be filled with beneficial knowledge and tranquility.`;
-
-    let i = 0;
-    const el = document.getElementById('typing');
-    const btn = document.getElementById('continueBtn');
-    el.textContent = '';
-    btn.classList.remove('visible');
-
-    function type() {
-      if (i < msg.length) {
-        el.textContent += msg[i++];
-        setTimeout(type, 30);
-      } else {
-        setTimeout(() => btn.classList.add('visible'), 600);
-      }
+    </section>
+    <!-- 2. Login -->
+    <section class="screen" id="login">
+      <div class="card">
+        <h2 class="title" style="color:var(--primary);">مرحبا بعودتك</h2>
+        <p class="arabic-title">Welcome Back</p>
+        <p class="subtitle">Sign in to resume your enlightened journey of Islamic knowledge</p>
+        <form id="loginForm">
+          <div class="input-wrap">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="usercode" placeholder=" " required autocomplete="username" />
+            <label for="usercode">Usercode</label>
+          </div>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="password" placeholder=" " required autocomplete="current-password" />
+            <label for="password">Password</label>
+            <button type="button" class="toggle"><i class="fa-solid fa-eye"></i></button>
+          </div>
+          <button type="submit" class="btn">Sign In <i class="fa-solid fa-sign-in-alt"></i></button>
+          <p class="warning" id="warning">Invalid credentials. Please try again or join our WhatsApp channel for assistance.</p>
+        </form>
+        <p style="margin-top:2.2rem; font-size:0.98rem; color:var(--text-m); text-align:center;">
+          New learner? <a id="wa" href="https://whatsapp.com/channel/0029VbBuXaRDTkKCT3hDly0K" target="_blank" style="color:var(--primary); font-weight:500; text-decoration:none;">Join our WhatsApp channel</a>
+        </p>
+      </div>
+    </section>
+    <!-- 3. Dashboard -->
+    <section class="screen" id="dashboard" style="display:none;">
+      <div class="dash-card">
+        <h1 class="title" style="background:linear-gradient(90deg, #e2e8f0, #d4a017, #e2e8f0); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Welcome Back</h1>
+        <div class="subtitle">Your Personalized Path to Beneficial Islamic Knowledge</div>
+        <p id="typing"></p>
+        <button id="continueBtn" class="continue-btn">
+          <span>Begin Learning Journey</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 4. Quran Learning -->
+    <section class="screen" id="quran">
+      <div class="content-card">
+        <h1 class="title">Quran Learning</h1>
+        <p class="arabic-title">تعلم القرآن</p>
+        <div class="subtitle">The Eternal Word of Allah</div>
+        <p class="arabic-text">القرآن الكريم هو كلام الله المنزل على نبينا محمد صلى الله عليه وسلم.</p>
+        <p class="content-text">
+          The Quran is Allah's final revelation to humanity, sent down to Prophet Muhammad ﷺ via Jibril over 23 years. It is a complete guidance, healing, mercy, and criterion between right and wrong (Al-Furqan). Muslims are encouraged to recite it beautifully (Tajweed), understand its meanings (Tadabbur), and live by its teachings. “This is the Book about which there is no doubt, a guidance for those conscious of Allah.” (Quran 2:2). Explore Surahs, Ayahs, and thematic studies.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#hadith')">
+          Next: Hadith <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 5. Hadith Learning -->
+    <section class="screen" id="hadith">
+      <div class="content-card">
+        <h1 class="title">Hadith Learning</h1>
+        <p class="arabic-title">تعلم الحديث</p>
+        <div class="subtitle">Sunnah of the Prophet ﷺ</div>
+        <p class="arabic-text">الحديث هو أقوال وأفعال وتقريرات النبي محمد صلى الله عليه وسلم.</p>
+        <p class="content-text">
+          Hadith are the authenticated sayings, actions, and silent approvals of Prophet Muhammad ﷺ. They explain the Quran and show practical Islam. The most authentic collections are Sahih al-Bukhari and Sahih Muslim. Famous example: “Actions are judged by intentions, and every person will have what they intended.” (Bukhari & Muslim). Learning Hadith helps perfect worship and character. Dive into chains of narration (Isnad) and gradings.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#fiqh')">
+          Next: Fiqh <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 6. Fiqh -->
+    <section class="screen" id="fiqh">
+      <div class="content-card">
+        <h1 class="title">Fiqh</h1>
+        <p class="arabic-title">الفقه</p>
+        <div class="subtitle">Islamic Jurisprudence</div>
+        <p class="arabic-text">الفقه هو فهم وتطبيق أحكام الشريعة من القرآن والسنة.</p>
+        <p class="content-text">
+          Fiqh is the understanding and application of Sharia rulings derived mainly from Quran and Sunnah. It covers purification (Taharah), prayer (Salah), fasting (Sawm), charity (Zakat), pilgrimage (Hajj), marriage, trade, and ethics. Major schools (Madhabs) — Hanafi, Maliki, Shafi'i, Hanbali — provide detailed guidance while agreeing on core principles. Begin with basics of wudu and salah, and advance to comparative Fiqh.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#history')">
+          Next: Islamic History <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 7. Islamic History -->
+    <section class="screen" id="history">
+      <div class="content-card">
+        <h1 class="title">Islamic History</h1>
+        <p class="arabic-title">التاريخ الإسلامي</p>
+        <div class="subtitle">From Revelation to Legacy</div>
+        <p class="arabic-text">يبدأ التاريخ الإسلامي بالوحي الأول في 610 م.</p>
+        <p class="content-text">
+          Islamic history starts with the first revelation in 610 CE in Makkah, the Hijrah to Madinah (622 CE — start of Hijri calendar), establishment of the Islamic state, major battles (Badr, Uhud), conquest of Makkah, and the rapid spread of Islam. Later caliphates (Rashidun, Umayyad, Abbasid) brought a golden age of science, medicine, and justice while preserving faith. Explore timelines, key figures, and lessons.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#prophets')">
+          Next: Stories of Prophets <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 8. Stories of Prophets -->
+    <section class="screen" id="prophets">
+      <div class="content-card">
+        <h1 class="title">Stories of Prophets</h1>
+        <p class="arabic-title">قصص الأنبياء</p>
+        <div class="subtitle">Lessons from Allah's Messengers</div>
+        <p class="arabic-text">أرسل الله الأنبياء إلى كل أمة.</p>
+        <p class="content-text">
+          Allah sent prophets to every nation, with Prophet Muhammad ﷺ as the seal. Key stories include Adam (creation), Nuh (ark & patience), Ibrahim (sacrifice & Tawhid), Musa (confronting Firawn), Yusuf (forgiveness), and Isa (miracles). Each teaches reliance on Allah, truthfulness, and the consequences of rejecting guidance. “And We have related to you their stories with truth.” (Quran 11:120). Detailed narratives and moral insights.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#duas')">
+          Next: Duas <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 9. Duas -->
+    <section class="screen" id="duas">
+      <div class="content-card">
+        <h1 class="title">Duas & Supplications</h1>
+        <p class="arabic-title">الدعاء والأذكار</p>
+        <div class="subtitle">Direct Conversation with Allah</div>
+        <p class="arabic-text">ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار.</p>
+        <p class="content-text">
+          Dua is the essence of worship. Authentic examples include: “Rabbana atina fid-dunya hasanah wa fil-akhirati hasanah wa qina ‘adhaban-nar” (Our Lord, give us good in this world and the Hereafter, and protect us from Hellfire) — Quran 2:201. Another: “Allahumma inni a‘udhu bika min al-hammi wal-hazan” (O Allah, I seek refuge in You from anxiety and sorrow) — Bukhari. Recite morning/evening adhkar for protection. Collection of daily Duas with audio.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#ramadan')">
+          Next: Ramadan Guide <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 10. Ramadan Guide -->
+    <section class="screen" id="ramadan">
+      <div class="content-card">
+        <h1 class="title">Ramadan Guide</h1>
+        <p class="arabic-title">دليل رمضان</p>
+        <div class="subtitle">Month of Quran, Mercy & Taqwa</div>
+        <p class="arabic-text">شهر رمضان الذي أنزل فيه القرآن.</p>
+        <p class="content-text">
+          Ramadan is the month in which the Quran was revealed. Fasting (Sawm) from Fajr to Maghrib trains self-control, empathy, and devotion. Muslims increase Quran recitation, give Sadaqah, pray Tarawih, and seek Laylatul-Qadr (better than 1000 months). Break fast with dates/water; make dua at Iftar. “O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become righteous.” (Quran 2:183). Full schedule, tips, and recipes.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#hajj')">
+          Next: Hajj & Umrah <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 11. Hajj & Umrah -->
+    <section class="screen" id="hajj">
+      <div class="content-card">
+        <h1 class="title">Hajj & Umrah</h1>
+        <p class="arabic-title">الحج والعمرة</p>
+        <div class="subtitle">Pillars of Pilgrimage</div>
+        <p class="arabic-text">الحج فريضة على كل قادر.</p>
+        <p class="content-text">
+          Hajj is obligatory once in a lifetime for those physically/financially able. Key rites: Ihram, Tawaf around Ka'bah, Sa'i between Safa & Marwah, standing at Arafah (main pillar), Muzdalifah, stoning, sacrifice, farewell Tawaf. Umrah is sunnah and can be done anytime. Both erase sins and unite Muslims in equality before Allah. Step-by-step guides with maps and videos.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#tafsir')">
+          Next: Tafsir <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 12. Tafsir -->
+    <section class="screen" id="tafsir">
+      <div class="content-card">
+        <h1 class="title">Tafsir</h1>
+        <p class="arabic-title">التفسير</p>
+        <div class="subtitle">Deep Understanding of Quran</div>
+        <p class="arabic-text">تفسير ابن كثير وغيره من التفاسير المعتمدة.</p>
+        <p class="content-text">
+          Tafsir explains Quranic verses — context (Asbab an-Nuzul), meanings, rulings, and lessons. Popular works: Tafsir Ibn Kathir (Hadith-based), Tafsir al-Jalalayn (concise). Study with qualified teachers to avoid misinterpretation. Tadabbur (reflection) brings barakah and closeness to Allah. Verse-by-verse explanations and thematic analyses.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#ethics')">
+          Next: Islamic Ethics <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 13. Islamic Ethics -->
+    <section class="screen" id="ethics">
+      <div class="content-card">
+        <h1 class="title">Islamic Ethics</h1>
+        <p class="arabic-title">الأخلاق الإسلامية</p>
+        <div class="subtitle">Akhlaq — Half of Faith</div>
+        <p class="arabic-text">إنما بعثت لأتمم مكارم الأخلاق.</p>
+        <p class="content-text">
+          Good character (Akhlaq) completes faith. The Prophet ﷺ said: “I was sent to perfect good character.” (Muwatta). Key traits: truthfulness, kindness, humility, controlling anger, fulfilling promises, honoring parents/neighbors, avoiding backbiting. “The best of you are those best to their families.” (Tirmidhi). Practical applications in daily life.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#articles')">
+          Next: Articles <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 14. Articles -->
+    <section class="screen" id="articles">
+      <div class="content-card">
+        <h1 class="title">Articles & Reflections</h1>
+        <p class="arabic-title">مقالات وتأملات</p>
+        <div class="subtitle">Deeper Insights</div>
+        <p class="arabic-text">استكشاف مواضيع مثل التوبة والصبر.</p>
+        <p class="content-text">
+          Explore topics like Tawbah (repentance), importance of seeking knowledge, dealing with trials, rights of parents, women in Islam, purpose of life, and more — all rooted in Quran & Sunnah. Each article helps apply Islamic principles to modern life. Curated library with search functionality.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#contact')">
+          Next: Contact <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 15. Contact -->
+    <section class="screen" id="contact">
+      <div class="content-card">
+        <h1 class="title">Contact Us</h1>
+        <p class="arabic-title">اتصل بنا</p>
+        <p class="content-text" style="margin-bottom:2.8rem;">
+          Questions, suggestions, or feedback? Reach out via WhatsApp. We're here to support your learning journey. May Allah increase us in beneficial knowledge.
+        </p>
+        <a href="https://whatsapp.com/channel/0029VbBuXaRDTkKCT3hDly0K" target="_blank" class="btn">Message on WhatsApp <i class="fa-brands fa-whatsapp"></i></a>
+        <button class="continue-btn visible" onclick="smoothScroll('#about')">
+          Next: About <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 16. About -->
+    <section class="screen" id="about">
+      <div class="content-card">
+        <h1 class="title">About SAM Institute</h1>
+        <p class="arabic-title">عن معهد سام</p>
+        <p class="content-text">
+          SAM Institute offers free, authentic Islamic education in a calm digital space. Our focus is helping Muslims — beginners to advanced — grow closer to Allah through Quran, Sunnah, and reliable knowledge. Simple, peaceful, and accessible anytime. Founded on principles of authenticity and accessibility.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#events')">
+          Next: Events <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 17. Events -->
+    <section class="screen" id="events">
+      <div class="content-card">
+        <h1 class="title">Events & Sessions</h1>
+        <p class="arabic-title">الفعاليات والجلسات</p>
+        <p class="content-text">
+          Join live Quran recitation, Hadith circles, Seerah nights, Ramadan Q&As, and special webinars (announced via WhatsApp). All free, interactive, and open to everyone seeking beneficial knowledge. Calendar integration and reminders.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#resources')">
+          Next: Resources <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 18. Resources -->
+    <section class="screen" id="resources">
+      <div class="content-card">
+        <h1 class="title">Recommended Resources</h1>
+        <p class="arabic-title">الموارد الموصى بها</p>
+        <p class="content-text">
+          Quran.com (recitation + translation), Sunnah.com (Hadith), Tafsir Ibn Kathir summaries, Riyadh as-Salihin, 40 Hadith Nawawi, SeekersGuidance free courses, Yaqeen Institute articles. Use authentic sources only. Links and descriptions for each.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#quiz')">
+          Next: Quiz <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 19. Quiz -->
+    <section class="screen" id="quiz">
+      <div class="content-card">
+        <h1 class="title">Knowledge Quiz</h1>
+        <p class="arabic-title">اختبار المعرفة</p>
+        <p class="content-text">
+          Test what you've learned! Short quizzes on Quran verses, Hadith meanings, Fiqh basics, Seerah events, Duas, and more are coming soon. Revise and strengthen your understanding. Interactive multiple-choice and fill-in.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#forum')">
+          Next: Forum <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 20. Forum -->
+    <section class="screen" id="forum">
+      <div class="content-card">
+        <h1 class="title">Community Forum</h1>
+        <p class="arabic-title">منتدى المجتمع</p>
+        <p class="content-text">
+          (Coming soon) A moderated space to ask questions, share reflections, discuss lessons — always with adab and sticking to Quran & authentic Sunnah. Learn together in a supportive environment. Guidelines and moderation policies.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#aqeedah')">
+          Next: Aqeedah <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 21. Aqeedah -->
+    <section class="screen" id="aqeedah">
+      <div class="content-card">
+        <h1 class="title">Aqeedah</h1>
+        <p class="arabic-title">العقيدة</p>
+        <div class="subtitle">Foundations of Belief</div>
+        <p class="arabic-text">الإيمان بالله والملائكة والكتب والرسل واليوم الآخر والقدر.</p>
+        <p class="content-text">
+          Aqeedah is the core beliefs of Islam: Tawhid (Oneness of Allah), angels, books, messengers, Day of Judgment, and predestination. Based on Quran and Sunnah, it forms the basis for all actions. Study pillars of Iman and avoid shirk.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#seerah')">
+          Next: Seerah <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 22. Seerah -->
+    <section class="screen" id="seerah">
+      <div class="content-card">
+        <h1 class="title">Seerah</h1>
+        <p class="arabic-title">السيرة النبوية</p>
+        <div class="subtitle">Life of the Prophet ﷺ</div>
+        <p class="arabic-text">سيرة النبي محمد صلى الله عليه وسلم من المولد إلى الوفاة.</p>
+        <p class="content-text">
+          Detailed biography of Prophet Muhammad ﷺ from birth in Makkah, revelation, migration, to passing. Lessons in leadership, mercy, and perseverance. Sources like Ibn Ishaq and Ibn Hisham.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#sahaba')">
+          Next: Sahaba Biographies <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 23. Sahaba Biographies -->
+    <section class="screen" id="sahaba">
+      <div class="content-card">
+        <h1 class="title">Sahaba Biographies</h1>
+        <p class="arabic-title">سير الصحابة</p>
+        <div class="subtitle">Companions of the Prophet</div>
+        <p class="arabic-text">أبو بكر وعمر وعثمان وعلي رضي الله عنهم.</p>
+        <p class="content-text">
+          Stories of Abu Bakr, Umar, Uthman, Ali, and other companions. Their faith, sacrifices, and contributions to Islam. Inspirational examples for Muslims.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#tawheed')">
+          Next: Tawheed <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 24. Tawheed -->
+    <section class="screen" id="tawheed">
+      <div class="content-card">
+        <h1 class="title">Tawheed</h1>
+        <p class="arabic-title">التوحيد</p>
+        <div class="subtitle">Oneness of Allah</div>
+        <p class="arabic-text">لا إله إلا الله محمد رسول الله.</p>
+        <p class="content-text">
+          Tawheed is affirming Allah's uniqueness in Lordship, Worship, and Names/Attributes. Core of Islam, protecting from shirk. Detailed categories and evidences.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#salah')">
+          Next: Salah Guide <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 25. Salah Guide -->
+    <section class="screen" id="salah">
+      <div class="content-card">
+        <h1 class="title">Salah Guide</h1>
+        <p class="arabic-title">دليل الصلاة</p>
+        <div class="subtitle">Prayer in Detail</div>
+        <p class="arabic-text">الصلاة عماد الدين.</p>
+        <p class="content-text">
+          Step-by-step guide to performing Salah, including Wudu, times, Rak'ahs, and Sunnah prayers. Common mistakes and virtues.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#zakat')">
+          Next: Zakat <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 26. Zakat -->
+    <section class="screen" id="zakat">
+      <div class="content-card">
+        <h1 class="title">Zakat</h1>
+        <p class="arabic-title">الزكاة</p>
+        <div class="subtitle">Purification of Wealth</div>
+        <p class="arabic-text">الزكاة على المال والمحاصيل والذهب.</p>
+        <p class="content-text">
+          Zakat is 2.5% obligatory charity on savings, purifying wealth and helping the needy. Calculation methods and recipients.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#sawm')">
+          Next: Sawm <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 27. Sawm -->
+    <section class="screen" id="sawm">
+      <div class="content-card">
+        <h1 class="title">Sawm</h1>
+        <p class="arabic-title">الصوم</p>
+        <div class="subtitle">Fasting Beyond Ramadan</div>
+        <p class="arabic-text">صوم الاثنين والخميس وغيرها.</p>
+        <p class="content-text">
+          Voluntary fasts like Mondays/Thursdays, Ashura, Arafah. Benefits, rules, and spiritual rewards.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#marriage')">
+          Next: Marriage in Islam <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 28. Marriage in Islam -->
+    <section class="screen" id="marriage">
+      <div class="content-card">
+        <h1 class="title">Marriage in Islam</h1>
+        <p class="arabic-title">الزواج في الإسلام</p>
+        <div class="subtitle">Building a Pious Family</div>
+        <p class="arabic-text">النكاح سنة النبي.</p>
+        <p class="content-text">
+          Rights and responsibilities of spouses, Nikah process, polygamy rules, and family life according to Sunnah.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#parenting')">
+          Next: Parenting <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 29. Parenting -->
+    <section class="screen" id="parenting">
+      <div class="content-card">
+        <h1 class="title">Islamic Parenting</h1>
+        <p class="arabic-title">تربية الأبناء</p>
+        <div class="subtitle">Raising Righteous Children</div>
+        <p class="arabic-text">حقوق الوالدين والأبناء.</p>
+        <p class="content-text">
+          Guidance on teaching Quran, manners, and faith to children. Duas for offspring and family harmony.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#economics')">
+          Next: Islamic Economics <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 30. Islamic Economics -->
+    <section class="screen" id="economics">
+      <div class="content-card">
+        <h1 class="title">Islamic Economics</h1>
+        <p class="arabic-title">الاقتصاد الإسلامي</p>
+        <div class="subtitle">Halal Trade and Finance</div>
+        <p class="arabic-text">حرام الربا والغش.</p>
+        <p class="content-text">
+          Principles of Riba-free banking, Zakat, Waqf, and ethical business practices.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#science')">
+          Next: Islam & Science <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 31. Islam & Science -->
+    <section class="screen" id="science">
+      <div class="content-card">
+        <h1 class="title">Islam & Science</h1>
+        <p class="arabic-title">الإسلام والعلم</p>
+        <div class="subtitle">Harmony of Faith and Knowledge</div>
+        <p class="arabic-text">العصر الذهبي الإسلامي.</p>
+        <p class="content-text">
+          Contributions of Muslim scholars like Ibn Sina, Al-Khwarizmi. Quranic miracles in science.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#art')">
+          Next: Islamic Art <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 32. Islamic Art -->
+    <section class="screen" id="art">
+      <div class="content-card">
+        <h1 class="title">Islamic Art</h1>
+        <p class="arabic-title">الفن الإسلامي</p>
+        <div class="subtitle">Calligraphy and Architecture</div>
+        <p class="arabic-text">الخط العربي والمساجد.</p>
+        <p class="content-text">
+          History of Islamic calligraphy, geometric patterns, and famous mosques like Al-Aqsa.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#women')">
+          Next: Women in Islam <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 33. Women in Islam -->
+    <section class="screen" id="women">
+      <div class="content-card">
+        <h1 class="title">Women in Islam</h1>
+        <p class="arabic-title">المرأة في الإسلام</p>
+        <div class="subtitle">Rights and Roles</div>
+        <p class="arabic-text">الجنة تحت أقدام الأمهات.</p>
+        <p class="content-text">
+          Equality in faith, rights to education, inheritance, and protection. Stories of Khadijah, Aisha.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#environment')">
+          Next: Islam & Environment <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 34. Islam & Environment -->
+    <section class="screen" id="environment">
+      <div class="content-card">
+        <h1 class="title">Islam & Environment</h1>
+        <p class="arabic-title">الإسلام والبيئة</p>
+        <div class="subtitle">Stewardship of Earth</div>
+        <p class="arabic-text">لا إسراف ولا تبذير.</p>
+        <p class="content-text">
+          Islamic teachings on conservation, animal rights, and sustainability.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#health')">
+          Next: Health & Hygiene <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 35. Health & Hygiene -->
+    <section class="screen" id="health">
+      <div class="content-card">
+        <h1 class="title">Health & Hygiene in Islam</h1>
+        <p class="arabic-title">الصحة والنظافة</p>
+        <div class="subtitle">Body as Amanah</div>
+        <p class="arabic-text">النظافة من الإيمان.</p>
+        <p class="content-text">
+          Sunnah practices for physical and mental health, diet, exercise, and medicine.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#dawah')">
+          Next: Dawah <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 36. Dawah -->
+    <section class="screen" id="dawah">
+      <div class="content-card">
+        <h1 class="title">Dawah</h1>
+        <p class="arabic-title">الدعوة</p>
+        <div class="subtitle">Inviting to Islam</div>
+        <p class="arabic-text">ادع إلى سبيل ربك بالحكمة.</p>
+        <p class="content-text">
+          Methods of calling to Islam with wisdom and good manners. Etiquette and common questions.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#trials')">
+          Next: Dealing with Trials <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 37. Dealing with Trials -->
+    <section class="screen" id="trials">
+      <div class="content-card">
+        <h1 class="title">Dealing with Trials</h1>
+        <p class="arabic-title">التعامل مع الابتلاءات</p>
+        <div class="subtitle">Patience and Trust</div>
+        <p class="arabic-text">إن الله مع الصابرين.</p>
+        <p class="content-text">
+          Quranic guidance on sabr, tawakkul, and turning trials into opportunities for growth.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#repentance')">
+          Next: Repentance <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 38. Repentance -->
+    <section class="screen" id="repentance">
+      <div class="content-card">
+        <h1 class="title">Tawbah (Repentance)</h1>
+        <p class="arabic-title">التوبة</p>
+        <div class="subtitle">Returning to Allah</div>
+        <p class="arabic-text">توبوا إلى الله توبة نصوحا.</p>
+        <p class="content-text">
+          Steps for sincere repentance, avoiding sins, and seeking forgiveness.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#gratitude')">
+          Next: Gratitude <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 39. Gratitude -->
+    <section class="screen" id="gratitude">
+      <div class="content-card">
+        <h1 class="title">Shukr (Gratitude)</h1>
+        <p class="arabic-title">الشكر</p>
+        <div class="subtitle">Thanking Allah</div>
+        <p class="arabic-text">لئن شكرتم لأزيدنكم.</p>
+        <p class="content-text">
+          Ways to express gratitude, its benefits, and Duas for shukr.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#charity')">
+          Next: Sadaqah <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 40. Charity -->
+    <section class="screen" id="charity">
+      <div class="content-card">
+        <h1 class="title">Sadaqah</h1>
+        <p class="arabic-title">الصدقة</p>
+        <div class="subtitle">Voluntary Charity</div>
+        <p class="arabic-text">الصدقة تطفئ الخطيئة كما يطفئ الماء النار.</p>
+        <p class="content-text">
+          Beyond Zakat, forms of Sadaqah like smiling, helping others, and its rewards.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#neighbors')">
+          Next: Rights of Neighbors <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 41. Rights of Neighbors -->
+    <section class="screen" id="neighbors">
+      <div class="content-card">
+        <h1 class="title">Rights of Neighbors</h1>
+        <p class="arabic-title">حقوق الجيران</p>
+        <div class="subtitle">Community Harmony</div>
+        <p class="arabic-text">الجار قبل الدار.</p>
+        <p class="content-text">
+          Hadiths on treating neighbors kindly, regardless of faith.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#animals')">
+          Next: Animals in Islam <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 42. Animals in Islam -->
+    <section class="screen" id="animals">
+      <div class="content-card">
+        <h1 class="title">Animals in Islam</h1>
+        <p class="arabic-title">الحيوانات في الإسلام</p>
+        <div class="subtitle">Mercy to Creation</div>
+        <p class="arabic-text">في كل كبد رطبة أجر.</p>
+        <p class="content-text">
+          Kindness to animals, Halal slaughter, and environmental care.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#travel')">
+          Next: Travel Etiquette <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 43. Travel Etiquette -->
+    <section class="screen" id="travel">
+      <div class="content-card">
+        <h1 class="title">Travel in Islam</h1>
+        <p class="arabic-title">السفر في الإسلام</p>
+        <div class="subtitle">Duas and Rules</div>
+        <p class="arabic-text">دعاء السفر والقصر في الصلاة.</p>
+        <p class="content-text">
+          Shortening prayers, Duas for journeys, and seeking knowledge through travel.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#dreams')">
+          Next: Dreams <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 44. Dreams -->
+    <section class="screen" id="dreams">
+      <div class="content-card">
+        <h1 class="title">Dreams in Islam</h1>
+        <p class="arabic-title">الأحلام</p>
+        <div class="subtitle">Interpretation and Etiquette</div>
+        <p class="arabic-text">الرؤيا الصالحة جزء من النبوة.</p>
+        <p class="content-text">
+          Types of dreams, seeking refuge from bad ones, and basic interpretation.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#jinn')">
+          Next: Jinn <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 45. Jinn -->
+    <section class="screen" id="jinn">
+      <div class="content-card">
+        <h1 class="title">Jinn in Islam</h1>
+        <p class="arabic-title">الجن</p>
+        <div class="subtitle">Unseen Creation</div>
+        <p class="arabic-text">سورة الجن وأذكار الوقاية.</p>
+        <p class="content-text">
+          Belief in Jinn, protection from evil, and Ruqyah.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#death')">
+          Next: Death & Afterlife <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 46. Death & Afterlife -->
+    <section class="screen" id="death">
+      <div class="content-card">
+        <h1 class="title">Death & Afterlife</h1>
+        <p class="arabic-title">الموت والآخرة</p>
+        <div class="subtitle">Preparation for Eternity</div>
+        <p class="arabic-text">كل نفس بما كسبت رهينة.</p>
+        <p class="content-text">
+          Janazah rites, Barzakh, Judgment Day, Jannah, and Jahannam.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#miracles')">
+          Next: Miracles of Prophets <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 47. Miracles of Prophets -->
+    <section class="screen" id="miracles">
+      <div class="content-card">
+        <h1 class="title">Miracles of Prophets</h1>
+        <p class="arabic-title">معجزات الأنبياء</p>
+        <div class="subtitle">Signs from Allah</div>
+        <p class="arabic-text">معجزة موسى وعيسى ومحمد.</p>
+        <p class="content-text">
+          Splitting the sea, healing the sick, Quran as eternal miracle.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#angels')">
+          Next: Angels <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 48. Angels -->
+    <section class="screen" id="angels">
+      <div class="content-card">
+        <h1 class="title">Angels in Islam</h1>
+        <p class="arabic-title">الملائكة</p>
+        <div class="subtitle">Servants of Allah</div>
+        <p class="arabic-text">جبريل وميكائيل وإسرافيل.</p>
+        <p class="content-text">
+          Roles of Jibril, Mika'il, Israfil, and recording angels.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#books')">
+          Next: Divine Books <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 49. Divine Books -->
+    <section class="screen" id="books">
+      <div class="content-card">
+        <h1 class="title">Divine Books</h1>
+        <p class="arabic-title">الكتب السماوية</p>
+        <div class="subtitle">Revelations from Allah</div>
+        <p class="arabic-text">التوراة والإنجيل والزبور والقرآن.</p>
+        <p class="content-text">
+          Tawrat, Injeel, Zabur, and Quran as final uncorrupted book.
+        </p>
+        <button class="continue-btn visible" onclick="smoothScroll('#qadr')">
+          Next: Qadr <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+    <!-- 50. Qadr -->
+    <section class="screen" id="qadr">
+      <div class="content-card">
+        <h1 class="title">Qadr (Predestination)</h1>
+        <p class="arabic-title">القدر</p>
+        <div class="subtitle">Divine Decree</div>
+        <p class="arabic-text">الإيمان بالقدر خيره وشره.</p>
+        <p class="content-text">
+          Understanding Allah's knowledge, writing, will, and creation. Balancing effort and trust.
+        </p>
+        <a href="#welcome" class="btn">Back to Start <i class="fa-solid fa-home"></i></a>
+      </div>
+    </section>
+  </div>
+  <nav class="nav-bar">
+    <i class="fa-solid fa-home nav-item" onclick="smoothScroll('#welcome')"></i>
+    <i class="fa-solid fa-user nav-item" onclick="smoothScroll('#login')"></i>
+    <i class="fa-solid fa-book-quran nav-item" onclick="smoothScroll('#quran')"></i>
+    <i class="fa-solid fa-mosque nav-item" onclick="smoothScroll('#hajj')"></i>
+    <i class="fa-solid fa-envelope nav-item" onclick="smoothScroll('#contact')"></i>
+  </nav>
+  <script>
+    // Enhanced Password Toggle
+    const toggle = document.querySelector('.toggle');
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const pw = document.getElementById('password');
+        const icon = toggle.querySelector('i');
+        pw.type = pw.type === 'password' ? 'text' : 'password';
+        icon.classList.toggle('fa-eye');
+        icon.classList.toggle('fa-eye-slash');
+      });
     }
-    type();
-  } else {
-    warn.style.display = 'block';
-    link.classList.add('shake');
-    setTimeout(() => link.classList.remove('shake'), 600);
-  }
-});
-</script>
+    // Login Handler with Security
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+      loginForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const uc = document.getElementById('usercode').value.trim();
+        const pw = document.getElementById('password').value.trim();
+        const warn = document.getElementById('warning');
+        // Simple client-side validation (in real app, use server-side)
+        if (uc === 'Samislamicweb' && pw === '87654321') {
+          document.getElementById('dashboard').style.display = 'grid';
+          smoothScroll('#dashboard');
+          const welcomeMsg = `Assalamu alaikum wa rahmatullahi wa barakatuh!\n\nWelcome to SAM Institute.\nMay Allah make this a source of beneficial knowledge, tranquility, and closeness to Him. Ameen.`;
+          let i = 0;
+          const el = document.getElementById('typing');
+          const btn = document.getElementById('continueBtn');
+          el.textContent = '';
+          btn.classList.remove('visible');
+          function typeWriter() {
+            if (i < welcomeMsg.length) {
+              el.textContent += welcomeMsg.charAt(i);
+              i++;
+              setTimeout(typeWriter, 28);
+            } else {
+              setTimeout(() => {
+                btn.classList.add('visible');
+                btn.style.transition = 'opacity 0.8s, transform 0.8s';
+              }, 800);
+            }
+          }
+          typeWriter();
+        } else {
+          warn.style.display = 'block';
+          document.getElementById('wa').classList.add('shake');
+          setTimeout(() => document.getElementById('wa').classList.remove('shake'), 1000);
+        }
+      });
+    }
+    // Dashboard Continue
+    const continueBtn = document.getElementById('continueBtn');
+    if (continueBtn) {
+      continueBtn.addEventListener('click', () => smoothScroll('#quran'));
+    }
+    // Smooth Scroll Function
+    function smoothScroll(target) {
+      document.querySelector(target).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // Progress Bar
+    const container = document.getElementById('container');
+    const progress = document.getElementById('progress');
+    container.addEventListener('scroll', () => {
+      const scrollTop = container.scrollTop;
+      const scrollHeight = container.scrollHeight - container.clientHeight;
+      const scrolled = (scrollTop / scrollHeight) * 100;
+      progress.style.width = scrolled + '%';
+    });
+    // Touch Swipe Enhancement
+    let touchStartY = 0;
+    let touchEndY = 0;
+    container.addEventListener('touchstart', e => touchStartY = e.changedTouches[0].screenY);
+    container.addEventListener('touchend', e => {
+      touchEndY = e.changedTouches[0].screenY;
+      if (touchStartY - touchEndY > 50) {
+        // Swipe up - next section
+        const current = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2).closest('.screen');
+        const next = current.nextElementSibling;
+        if (next) smoothScroll('#' + next.id);
+      } else if (touchEndY - touchStartY > 50) {
+        // Swipe down - previous section
+        const current = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2).closest('.screen');
+        const prev = current.previousElementSibling;
+        if (prev) smoothScroll('#' + prev.id);
+      }
+    });
+    // Parallax Effect on Scroll
+    const screens = document.querySelectorAll('.screen');
+    container.addEventListener('scroll', () => {
+      screens.forEach(screen => {
+        const rect = screen.getBoundingClientRect();
+        const offset = rect.top / window.innerHeight;
+        screen.style.transform = `translateZ(${offset * -20}px)`;
+      });
+    });
+    // Nav Active State
+    const navItems = document.querySelectorAll('.nav-item');
+    window.addEventListener('scroll', () => {
+      const currentSection = [...screens].find(screen => {
+        const rect = screen.getBoundingClientRect();
+        return rect.top >= 0 && rect.top < window.innerHeight / 2;
+      });
+      navItems.forEach(item => {
+        item.classList.toggle('active', item.onclick.toString().includes(currentSection.id));
+      });
+    });
+    // Prevent Zoom on Mobile
+    document.addEventListener('gesturestart', e => e.preventDefault());
+    document.addEventListener('dblclick', e => e.preventDefault());
+    // Accessibility: Keyboard Navigation
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') {
+        const current = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2).closest('.screen');
+        const next = current.nextElementSibling;
+        if (next) smoothScroll('#' + next.id);
+      } else if (e.key === 'ArrowUp') {
+        const current = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2).closest('.screen');
+        const prev = current.previousElementSibling;
+        if (prev) smoothScroll('#' + prev.id);
+      }
+    });
+  </script>
 </body>
 </html>
